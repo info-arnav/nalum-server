@@ -20,3 +20,7 @@ mongoose
   });
 
 app.listen(5000, () => console.log("Server is running"));
+
+app.get("/status", (req, res) => {
+  res.json({ status: "ok" });
+});
