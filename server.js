@@ -1,11 +1,13 @@
 const express = require("express");
 const mongoose = require("mongoose");
 
+const status = require("./routes/status");
+
 require("dotenv").config();
 
 const app = express();
 
-MONGODB_URL = "mongodb://localhost:27017";
+MONGODB_URL = process.env.MONGODB_URI;
 
 mongoose
   .connect(MONGODB_URL, {
@@ -13,9 +15,9 @@ mongoose
     useUnifiedTopology: true,
   })
   .catch((error) => {
-    console.error("Error connecting to MongoDB:", error);
+    console.error(error);
   });
 
-app.get("/status", (req, res) => {
-  res.json({ status: "ok" });
-});
+app.use("/status", status);
+
+app.listen(5000);
