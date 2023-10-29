@@ -1,31 +1,21 @@
-import QueryString from "./query-string";
+const recruited = require("../schemas/recruited");
+const express = require("express");
 
-export default async function login(req, res) {
-  let body = JSON.parse(req.body);
+const router = express.Router();
+
+router.post("/", async (req, res) => {
+  let body = req.body;
   try {
-    const data = await fetch(process.env.GRAPHQL_URI, {
-      method: "POST",
-      headers: {
-        apikey: process.env.GRAPHQL_API,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        query: `
-query{
-  recruited(query:${QueryString({ _id: body.id })}) {
-    title,
-    company,
-    _id,
-  }
-}
-`,
-      }),
-    }).then((e) => e.json());
+    let postData = await recruited
+      .find({ _id: body.id })
+      .select("title company _id");
     res.json({
       error: false,
-      data: data.data.recruited,
+      data: postData[0],
     });
   } catch {
     res.json({ error: true, message: "Some Error Occured" });
   }
-}
+});
+
+module.exports = router;

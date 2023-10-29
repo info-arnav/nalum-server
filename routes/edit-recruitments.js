@@ -14,6 +14,7 @@ router.post("/", async (req, res) => {
     let id = body.id;
     delete body.email;
     delete body.id;
+    delete body.token;
     let data = await recruitments.findOneAndUpdate(
       {
         email: email,
@@ -21,7 +22,7 @@ router.post("/", async (req, res) => {
       },
       body
     );
-    res.json({ error: true, data: data });
+    res.json({ error: false, data: data });
   } else {
     res.json({ error: true, message: "Some Error Occured" });
   }

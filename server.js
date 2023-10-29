@@ -28,6 +28,15 @@ const findRecruitment = require("./routes/find-recruitments");
 const createRecruitment = require("./routes/create-recruitment");
 const deleteRecruitment = require("./routes/delete-recruitment");
 const editRecruitment = require("./routes/edit-recruitments");
+const findRecruitedCandidates = require("./routes/find-recruited-candidates");
+const applicantsRecruitment = require("./routes/applicants-recruitment");
+const getMetaData = require("./routes/get-meta-data");
+const getPostMetaData = require("./routes/get-post-meta-data");
+const getRecruitmentStatus = require("./routes/get-recruitment-status");
+const getPostAllData = require("./routes/get-post-all-data");
+const recruitmentClose = require("./routes/recruitment-close");
+const getRecruitedRostRetaData = require("./routes/get-recruited-post-meta-data");
+const getRecruitedsStatus = require("./routes/get-recruiteds-status");
 
 require("dotenv").config();
 
@@ -74,6 +83,15 @@ app.use("/find-recruitments", findRecruitment);
 app.use("/create-recruitment", createRecruitment);
 app.use("/delete-recruitment", deleteRecruitment);
 app.use("/edit-recruitments", editRecruitment);
+app.use("/find-recruited-candidates", findRecruitedCandidates);
+app.use("/applicants-recruitment", applicantsRecruitment);
+app.use("/get-meta-data", getMetaData);
+app.use("/get-post-meta-data", getPostMetaData);
+app.use("/get-recruitment-status", getRecruitmentStatus);
+app.use("/get-post-all-data", getPostAllData);
+app.use("/recruitment-close", recruitmentClose);
+app.use("/get-recruited-post-meta-data", getRecruitedRostRetaData);
+app.use("/get-recruiteds-status", getRecruitedsStatus);
 app.use("/", (req, res) => {
   res.json({ error: true, message: "Unautherized Access" });
 });

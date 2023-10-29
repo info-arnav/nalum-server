@@ -1,32 +1,21 @@
-import QueryString from "./query-string";
+const registerations = require("../schemas/registerations");
+const express = require("express");
 
-export default async function login(req, res) {
-  let body = JSON.parse(req.body);
+const router = express.Router();
+
+router.post("/", async (req, res) => {
+  let body = req.body;
   try {
-    const data = await fetch(process.env.GRAPHQL_URI, {
-      method: "POST",
-      headers: {
-        apikey: process.env.GRAPHQL_API,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        query: `
-query{
-  registeration(query:${QueryString({ _id: body.id })}) {
-    name,
-    verified,
-    _id,
-    type
-  }
-}
-`,
-      }),
-    }).then((e) => e.json());
+    let userData = await registerations
+      .find({ _id: body.id })
+      .select("name verified _id type");
     res.json({
       error: false,
-      data: data.data.registeration,
+      data: userData[0],
     });
   } catch {
     res.json({ error: true, message: "Some Error Occured" });
   }
-}
+});
+
+module.exports = router;
