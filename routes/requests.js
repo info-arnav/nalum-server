@@ -1,49 +1,27 @@
-import cookie from "cookie";
-import CryptoJS from "crypto-js";
-import QueryString from "./query-string";
+const registerations = require("../schemas/registerations");
+const express = require("express");
+const authenticate = require("../utilities/authenticate");
 
-export default async function Requests(req, res) {
-  let body = JSON.parse(req.body);
-  const cookies = cookie.parse(req.headers.cookie || "");
-  try {
-    const mid_password = CryptoJS.AES.decrypt(
-      cookies.login_token,
-      process.env.SECRET
-    );
-    const password = mid_password.toString(CryptoJS.enc.Utf8);
-    const data = await fetch(process.env.GRAPHQL_URI, {
-      method: "POST",
-      headers: {
-        email: body.email,
-        password: password,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        query: `
-  query{
-    registerations(limit: 10, query:${QueryString({
-      verified: "false",
-      type: "alumni",
-      error: "",
-    })}) {
-      files
-      email
-      roll
-      work_status
-      batch
-      department
-      course
-      phone
-    }
-  }
-  `,
-      }),
-    }).then((e) => e.json());
-    res.json({
-      error: false,
-      data: data.data.registerations,
-    });
-  } catch {
+const router = express.Router();
+
+router.post("/", async (req, res) => {
+  let body = req.body;
+
+  let auth = authenticate(body.email, body.token);
+  let userData = await registerations.find({ email: body.email });
+  if (auth && userData[0].verified == "true" && userData[0].type == "admin") {
+    let data = await registerations
+      .find({
+        verified: "false",
+        type: "alumni",
+        error: "",
+      })
+      .select("files email roll work_status batch department course phone")
+      .limit(10);
+    res.json({ error: false, data: data });
+  } else {
     res.json({ error: true, message: "Some Error Occured" });
   }
-}
+});
+
+module.exports = router;

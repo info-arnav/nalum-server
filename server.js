@@ -20,6 +20,14 @@ const sendInvite = require("./routes/send-invite");
 const getUserInfo = require("./routes/get-user-info");
 const setProfilePicture = require("./routes/set-profile-picture");
 const updateProfile = require("./routes/update-profile");
+const requestsAction = require("./routes/requests-action");
+const requests = require("./routes/requests");
+const editPortfolioItem = require("./routes/edit-portfolio-item");
+const contact = require("./routes/contact");
+const findRecruitment = require("./routes/find-recruitments");
+const createRecruitment = require("./routes/create-recruitment");
+const deleteRecruitment = require("./routes/delete-recruitment");
+const editRecruitment = require("./routes/edit-recruitments");
 
 require("dotenv").config();
 
@@ -58,6 +66,14 @@ app.use("/send-invite", sendInvite);
 app.use("/get-user-info", getUserInfo);
 app.use("/set-profile-picture", setProfilePicture);
 app.use("/update-profile", updateProfile);
+app.use("/requests-action", requestsAction);
+app.use("/requests", requests);
+app.use("/edit-portfolio-item", editPortfolioItem);
+app.use("/contact", contact);
+app.use("/find-recruitments", findRecruitment);
+app.use("/create-recruitment", createRecruitment);
+app.use("/delete-recruitment", deleteRecruitment);
+app.use("/edit-recruitments", editRecruitment);
 app.use("/", (req, res) => {
   res.json({ error: true, message: "Unautherized Access" });
 });

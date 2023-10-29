@@ -1,28 +1,19 @@
-import QueryString from "./query-string";
+const contact = require("../schemas/contact");
+const express = require("express");
 
-export default async function contact(req, res) {
-  let body = JSON.parse(req.body);
-  const data = await fetch(process.env.GRAPHQL_URI, {
-    method: "POST",
-    headers: {
-      apikey: process.env.GRAPHQL_API,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      query: `
-      mutation {
-        insertOneMessage(data: ${QueryString({
-          email: body.email,
-          message: body.message,
-        })}) {
-          _id
-          email
-          message
-        }
-      }
-    `,
-    }),
-  }).then((e) => e.json());
-  data.status = true;
-  res.json(data);
-}
+const router = express.Router();
+
+router.post("/", async (req, res) => {
+  let body = req.body;
+  try {
+    await contact.create({
+      email: body.email,
+      message: body.message,
+    });
+    res.json({ error: false, message: "Message Successfully Sent" });
+  } catch {
+    res.json({ error: true, message: "Some Error Occured" });
+  }
+});
+
+module.exports = router;
