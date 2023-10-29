@@ -1,20 +1,10 @@
-const { default: mongoose } = require("mongoose");
+const mongoose = require("mongoose");
 
 const imagesSchema = new mongoose.Schema({
-  title: "image",
-  properties: {
-    _id: {
-      bsonType: "objectId",
-    },
-    image: {
-      bsonType: "string",
-    },
-    id: {
-      bsonType: "string",
-    },
-  },
+  image: String,
+  id: String,
 });
 
-const Images = mongoose.model("image", imagesSchema);
+const Images = mongoose.model("Image", imagesSchema);
 
 module.exports = Images;

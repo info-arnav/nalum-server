@@ -1,17 +1,10 @@
-const { default: mongoose } = require("mongoose");
+const mongoose = require("mongoose");
 
 const verifiedSchema = new mongoose.Schema({
-  title: "verified",
-  properties: {
-    email: {
-      bsonType: "string",
-    },
-    verifier: {
-      bsonType: "string",
-    },
-  },
+  email: String,
+  verifier: String,
 });
 
-const Verified = mongoose.model("verified", verifiedSchema);
+const Verified = mongoose.model("Verified", verifiedSchema);
 
 module.exports = Verified;

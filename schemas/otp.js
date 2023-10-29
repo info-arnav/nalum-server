@@ -1,20 +1,10 @@
-const { default: mongoose } = require("mongoose");
+const mongoose = require("mongoose");
 
 const otpSchema = new mongoose.Schema({
-  title: "otp",
-  properties: {
-    _id: {
-      bsonType: "objectId",
-    },
-    email: {
-      bsonType: "string",
-    },
-    otp: {
-      bsonType: "string",
-    },
-  },
+  email: String,
+  otp: String,
 });
 
-const Otp = mongoose.model("otp", otpSchema);
+const Otp = mongoose.model("OTP", otpSchema);
 
 module.exports = Otp;

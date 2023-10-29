@@ -1,104 +1,38 @@
-const { default: mongoose } = require("mongoose");
+const mongoose = require("mongoose");
 
-const registerationSchema = new mongoose.Schema({
-  title: "registeration",
-  properties: {
-    _id: {
-      bsonType: "objectId",
-    },
-    sessions: {
-      bsonType: "array",
-      items: {
-        bsonType: "string",
-      },
-    },
-    batch: {
-      bsonType: "string",
-    },
-    bio: {
-      bsonType: "string",
-    },
-    branch: {
-      bsonType: "string",
-    },
-    linkedin: {
-      bsonType: "string",
-    },
-    email: {
-      bsonType: "string",
-    },
-    name: {
-      bsonType: "string",
-    },
-    occupation: {
-      bsonType: "string",
-    },
-    education: {
-      bsonType: "string",
-    },
-    projects: {
-      bsonType: "string",
-    },
-    honors: {
-      bsonType: "string",
-    },
-    password: {
-      bsonType: "string",
-    },
-    type: {
-      bsonType: "string",
-    },
-    verified: {
-      bsonType: "string",
-    },
-    files: {
-      bsonType: "string",
-    },
-    portfolio: {
-      bsonType: "string",
-    },
-    otp: {
-      bsonType: "string",
-    },
-    api: {
-      bsonType: "string",
-    },
-    image: {
-      bsonType: "string",
-    },
-    applications: {
-      bsonType: "string",
-    },
-    user_id: {
-      bsonType: "string",
-    },
-    phone: {
-      bsonType: "string",
-    },
-    course: {
-      bsonType: "string",
-    },
-    department: {
-      bsonType: "string",
-    },
-    work_status: {
-      bsonType: "string",
-    },
-    roll: {
-      bsonType: "string",
-    },
-    error: {
-      bsonType: "string",
-    },
-    instagram: {
-      bsonType: "string",
-    },
-    facebook: {
-      bsonType: "string",
-    },
-  },
+const registrationSchema = new mongoose.Schema({
+  sessions: Array,
+  secret: String,
+  batch: String,
+  bio: String,
+  branch: String,
+  linkedin: String,
+  email: String,
+  name: String,
+  occupation: Array,
+  education: Array,
+  projects: Array,
+  honors: Array,
+  password: String,
+  type: String,
+  verified: String,
+  files: String,
+  portfolio: String,
+  otp: String,
+  api: String,
+  image: String,
+  applications: Array,
+  user_id: String,
+  phone: String,
+  course: String,
+  department: String,
+  work_status: String,
+  roll: String,
+  error: String,
+  instagram: String,
+  facebook: String,
 });
 
-const Registerations = mongoose.model("registeration", registerationSchema);
+const Registrations = mongoose.model("Registration", registrationSchema);
 
-module.exports = Registerations;
+module.exports = Registrations;

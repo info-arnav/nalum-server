@@ -1,50 +1,19 @@
-const { default: mongoose } = require("mongoose");
+const mongoose = require("mongoose");
 
 const recruitmentSchema = new mongoose.Schema({
-  title: "recruitment",
-  properties: {
-    _id: {
-      bsonType: "objectId",
-    },
-    stipend: {
-      bsonType: "string",
-    },
-    title: {
-      bsonType: "string",
-    },
-    description: {
-      bsonType: "string",
-    },
-    company: {
-      bsonType: "string",
-    },
-    email: {
-      bsonType: "string",
-    },
-    link: {
-      bsonType: "string",
-    },
-    date: {
-      bsonType: "string",
-    },
-    location: {
-      bsonType: "string",
-    },
-    duration: {
-      bsonType: "string",
-    },
-    applicants: {
-      bsonType: "array",
-      items: {
-        bsonType: "string",
-      },
-    },
-    deadline: {
-      bsonType: "string",
-    },
-  },
+  stipend: String,
+  title: String,
+  description: String,
+  company: String,
+  email: String,
+  link: String,
+  date: String,
+  location: String,
+  duration: String,
+  applicants: Array,
+  deadline: String,
 });
 
-const Recruitment = mongoose.model("recruitment", recruitmentSchema);
+const Recruitment = mongoose.model("Recruitment", recruitmentSchema);
 
 module.exports = Recruitment;

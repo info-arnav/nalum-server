@@ -1,20 +1,10 @@
-const { default: mongoose } = require("mongoose");
+const mongoose = require("mongoose");
 
 const creationsSchema = new mongoose.Schema({
-  title: "creations",
-  properties: {
-    _id: {
-      bsonType: "objectId",
-    },
-    accepted: {
-      bsonType: "string",
-    },
-    creator: {
-      bsonType: "string",
-    },
-  },
+  accepted: String,
+  creator: String,
 });
 
-const Creations = mongoose.model("creations", creationsSchema);
+const Creations = mongoose.model("Creation", creationsSchema);
 
 module.exports = Creations;
