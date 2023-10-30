@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
+const cors = require("cors");
 
 const status = require("./routes/status");
 const image = require("./routes/images");
@@ -46,6 +47,11 @@ app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.raw({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use(cookieParser());
+app.use(
+  cors({
+    origin: process.env.LINK,
+  })
+);
 
 MONGODB_URL = process.env.MONGODB_URI;
 
