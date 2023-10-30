@@ -52,6 +52,17 @@ app.use(
     origin: "https://nsut.alumninet.in",
   })
 );
+app.use((req, res, next) => {
+  const requestIP = req.ip;
+  const allowedIP = '::1';
+
+  if (requestIP === allowedIP) {
+    next();
+  } else {
+    res.status(403).send({error:true, message:'Forbidden - Access Denied'});
+  }
+});
+
 
 MONGODB_URL = process.env.MONGODB_URI;
 
