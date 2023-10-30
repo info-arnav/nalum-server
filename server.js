@@ -49,7 +49,7 @@ app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use(cookieParser());
 app.use(
   cors({
-    origin: process.env.LINK,
+    origin: "https://nsut.alumninet.in",
   })
 );
 
