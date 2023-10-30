@@ -53,6 +53,19 @@ app.use(
   })
 );
 
+app.use((req, res, next) => {
+  const allowedOrigin = process.env.LINK;
+  const customOrigin = req.headers["my-origin"];
+
+  if (customOrigin !== allowedOrigin) {
+    return res
+      .status(403)
+      .json({ error: true, message: "Unauthorized Access" });
+  }
+
+  next();
+});
+
 MONGODB_URL = process.env.MONGODB_URI;
 
 mongoose
