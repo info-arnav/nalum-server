@@ -16,7 +16,7 @@ router.post("/", async (req, res) => {
         type: "alumni",
         error: "",
       })
-      .select("-files email roll work_status batch department course phone")
+      .select("files email roll work_status batch department course phone")
       .limit(10);
     res.json({ error: false, data: data });
   } else {
