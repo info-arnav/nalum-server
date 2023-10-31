@@ -10,7 +10,8 @@ router.post("/", async (req, res) => {
     let auth = authenticate(body.auth_email, body.token);
     let userData = await registerations
       .find({ email: body.auth_email })
-      .select("-sessions -secret -password -docs")
+      .select("_id -sessions -secret -password -docs")
+      .sort({ _id: -1 })
       .limit(body.num);
     if (auth && userData[0].verified == "true") {
       res.json({

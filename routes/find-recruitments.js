@@ -11,7 +11,9 @@ router.post("/", async (req, res) => {
   let userData = await registerations.find({ email: body.auth_email });
   if (auth && userData[0].verified == "true") {
     if (body.email) {
-      const data = await recruitments.find({ email: body.email });
+      const data = await recruitments
+        .find({ email: body.email })
+        .sort({ _id: -1 });
       res.json({ error: false, data: data || [] });
     } else {
       const data = await recruitments.find({});

@@ -13,7 +13,9 @@ router.post("/", async (req, res) => {
     body.email = body.auth_email;
     delete body.auth_email;
     delete body.token;
-    res.json({ error: false, data: await recruited.find(body) });
+    res
+      .json({ error: false, data: await recruited.find(body) })
+      .sort({ _id: -1 });
   } else {
     res.json({ error: true, message: "Some Error Occured" });
   }
