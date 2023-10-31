@@ -18,7 +18,7 @@ router.post("/", async (req, res) => {
             batch: userData[0].batch,
             verified: "true",
           })
-          .select("_id -sessions -docs -secret -password -docs")
+          .select("_id -sessions -files -secret -password -files")
           .sort({ _id: -1 })
           .limit(body.num),
       });

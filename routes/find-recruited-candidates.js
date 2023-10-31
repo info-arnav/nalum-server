@@ -18,7 +18,7 @@ router.post("/", async (req, res) => {
         error: false,
         data: await recruited
           .find(body)
-          .select("-sessions -docs -secret -password"),
+          .select("-sessions -files -secret -password"),
       })
       .sort({ _id: -1 });
   } else {

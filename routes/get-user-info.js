@@ -16,7 +16,7 @@ router.post("/", async (req, res) => {
         error: false,
         data: await registerations
           .find(body.email ? { email: body.email } : { _id: body.id })
-          .select("-sessions -docs -secret -password -docs"),
+          .select("-sessions -files -secret -password -files"),
       });
     } else {
       res.json({ error: true, message: "Some Error Occured" });
