@@ -36,7 +36,7 @@ router.post("/", async (req, res) => {
     if (body.verified == "true") {
       await index
         .saveObject({
-          type: body.type,
+          type: "alumni",
           email: body.second_email,
           objectID: newUserData[0]._id,
           image: `${process.env.LINK}api/image/${newUserData[0]._id}`,
