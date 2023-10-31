@@ -34,7 +34,7 @@ router.post("/", async (req, res) => {
       1, 10, 50, 100, 150, 200, 250, 300, 500, 1000, 1500, 2000, 5000, 10000,
       20000, 30000, 50000,
     ];
-    if (numbers.includes(applicants) != -1) {
+    if (numbers.includes(applicants)) {
       let transporter = nodemailer.createTransport({
         host: "smtp.rediffmailpro.com",
         port: 465,
