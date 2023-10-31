@@ -8,11 +8,8 @@ router.post("/", async (req, res) => {
   let body = req.body;
   try {
     let auth = authenticate(body.auth_email, body.token);
-    let userData = await registerations
-      .find({ email: body.auth_email })
-      .select("_id -sessions -secret -password -docs")
-      .sort({ _id: -1 })
-      .limit(body.num);
+    let userData = await registerations.find({ email: body.auth_email });
+
     if (auth && userData[0].verified == "true") {
       res.json({
         error: false,
@@ -21,8 +18,9 @@ router.post("/", async (req, res) => {
             batch: userData[0].batch,
             verified: "true",
           })
-          .select("-sessions -secret -password")
-          .sort({ _id: -1 }),
+          .select("_id -sessions -docs -secret -password -docs")
+          .sort({ _id: -1 })
+          .limit(body.num),
       });
     } else {
       res.json({ error: true, message: "Some Error Occured" });

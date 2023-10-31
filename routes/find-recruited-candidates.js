@@ -16,7 +16,9 @@ router.post("/", async (req, res) => {
     res
       .json({
         error: false,
-        data: await recruited.find(body).select("-sessions -secret -password"),
+        data: await recruited
+          .find(body)
+          .select("-sessions -docs -secret -password"),
       })
       .sort({ _id: -1 });
   } else {

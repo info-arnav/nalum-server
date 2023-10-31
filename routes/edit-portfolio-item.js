@@ -48,7 +48,7 @@ router.post("/", async (req, res) => {
       .find({
         email: body.email,
       })
-      .select("-sessions -secret -password");
+      .select("-sessions -docs -secret -password");
     res.json({ error: false, data: data[0] });
   } else {
     res.json({ error: true, message: "Some Error Occured" });
