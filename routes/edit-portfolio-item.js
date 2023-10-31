@@ -44,9 +44,11 @@ router.post("/", async (req, res) => {
         $set: obj2,
       });
     }
-    let data = await registerations.find({
-      email: body.email,
-    });
+    let data = await registerations
+      .find({
+        email: body.email,
+      })
+      .select("-sessions -secret -password");
     res.json({ error: false, data: data[0] });
   } else {
     res.json({ error: true, message: "Some Error Occured" });

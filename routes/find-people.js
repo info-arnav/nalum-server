@@ -16,10 +16,13 @@ router.post("/", async (req, res) => {
     if (auth && userData[0].verified == "true") {
       res.json({
         error: false,
-        data: await registerations.find({
-          batch: userData[0].batch,
-          verified: "true",
-        }),
+        data: await registerations
+          .find({
+            batch: userData[0].batch,
+            verified: "true",
+          })
+          .select("-sessions -secret -password")
+          .sort({ _id: -1 }),
       });
     } else {
       res.json({ error: true, message: "Some Error Occured" });
