@@ -1,6 +1,7 @@
 const registerations = require("../schemas/registerations");
 const express = require("express");
 const authenticate = require("../utilities/authenticate");
+const verified = require("../schemas/verified");
 
 const router = express.Router();
 
@@ -10,18 +11,11 @@ router.post("/", async (req, res) => {
     let auth = authenticate(body.auth_email, body.token);
     let userData = await registerations.find({ email: body.auth_email });
 
-    if (auth && userData[0].verified == "true") {
-      let searchData = {
-        batch: userData[0].batch,
-        verified: "true",
-      };
-      if (userData[0].type == "admin") {
-        delete searchData.batch;
-      }
+    if (auth && userData[0].verified == "true" && userData[0].type == "admin") {
       res.json({
         error: false,
-        data: await registerations
-          .find(searchData)
+        data: await verified
+          .find({})
           .select("_id -sessions -files -secret -password -files")
           .sort({ _id: -1 })
           .limit(body.num),

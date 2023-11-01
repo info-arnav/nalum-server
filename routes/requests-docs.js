@@ -12,13 +12,11 @@ router.post("/", async (req, res) => {
   if (auth && userData[0].verified == "true" && userData[0].type == "admin") {
     let data = await registerations
       .find({
-        verified: "false",
-        type: "alumni",
-        error: "",
+        email: body.find_email,
       })
-      .select("email roll work_status batch department course phone")
+      .select("files")
       .limit(10);
-    res.json({ error: false, data: data });
+    res.json({ error: false, data: data[0].files });
   } else {
     res.json({ error: true, message: "Some Error Occured" });
   }

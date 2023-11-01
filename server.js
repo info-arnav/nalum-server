@@ -23,6 +23,7 @@ const setProfilePicture = require("./routes/set-profile-picture");
 const updateProfile = require("./routes/update-profile");
 const requestsAction = require("./routes/requests-action");
 const requests = require("./routes/requests");
+const requestsDocs = require("./routes/requests-docs");
 const editPortfolioItem = require("./routes/edit-portfolio-item");
 const contact = require("./routes/contact");
 const findRecruitment = require("./routes/find-recruitments");
@@ -38,6 +39,8 @@ const getPostAllData = require("./routes/get-post-all-data");
 const recruitmentClose = require("./routes/recruitment-close");
 const getRecruitedRostRetaData = require("./routes/get-recruited-post-meta-data");
 const getRecruitedsStatus = require("./routes/get-recruiteds-status");
+const messages = require("./routes/messages");
+const findInvitedPeople = require("./routes/find-invited-people");
 
 require("dotenv").config();
 
@@ -54,15 +57,14 @@ app.use(
 );
 app.use((req, res, next) => {
   const requestIP = req.ip;
-  const allowedIP = '::1';
+  const allowedIP = "::1";
 
   if (requestIP === allowedIP) {
     next();
   } else {
-    res.status(403).send({error:true, message:'Forbidden - Access Denied'});
+    res.status(403).send({ error: true, message: "Forbidden - Access Denied" });
   }
 });
-
 
 MONGODB_URL = process.env.MONGODB_URI;
 
@@ -94,6 +96,7 @@ app.use("/set-profile-picture", setProfilePicture);
 app.use("/update-profile", updateProfile);
 app.use("/requests-action", requestsAction);
 app.use("/requests", requests);
+app.use("/requests-docs", requestsDocs);
 app.use("/edit-portfolio-item", editPortfolioItem);
 app.use("/contact", contact);
 app.use("/find-recruitments", findRecruitment);
@@ -109,6 +112,8 @@ app.use("/get-post-all-data", getPostAllData);
 app.use("/recruitment-close", recruitmentClose);
 app.use("/get-recruited-post-meta-data", getRecruitedRostRetaData);
 app.use("/get-recruiteds-status", getRecruitedsStatus);
+app.use("/messages", messages);
+app.use("/find-invited-people", findInvitedPeople);
 app.use("/", (req, res) => {
   res.json({ error: true, message: "Unautherized Access" });
 });
