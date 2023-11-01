@@ -84,7 +84,7 @@ app.use("/otp-verify", otpVerify);
 app.use("/register", register);
 app.use("/login", login);
 app.use("/reset", reset);
-app.use("reset-otp-send", resetOtpSend);
+app.use("/reset-otp-send", resetOtpSend);
 app.use("logout", logout);
 app.use("/update-info", updateInfo);
 app.use("/get-doc", getDoc);
