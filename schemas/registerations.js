@@ -31,6 +31,7 @@ const registrationSchema = new mongoose.Schema({
   error: String,
   instagram: String,
   facebook: String,
+  verifier: String,
 });
 
 const Registrations = mongoose.model("Registration", registrationSchema);

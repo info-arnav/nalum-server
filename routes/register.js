@@ -6,6 +6,7 @@ const otp = require("../schemas/otp");
 const express = require("express");
 const algoliasearch = require("algoliasearch");
 const login = require("../utilities/login");
+const code = require("../schemas/codes");
 
 const router = express.Router();
 
@@ -23,13 +24,36 @@ router.post("/", async (req, res) => {
       bcrypt.hash(body.password, 10, async function (err, hash) {
         let verified;
         let type;
-
+        let verifier = "";
         if (
           body.email.split("@")[1] == "nsut.ac.in" &&
           body.type == "student"
         ) {
           verified = "true";
           type = "student";
+        } else if (body.code) {
+          let code_data = await code.find({ code: body.code });
+          if (code_data.length != 0) {
+            verified = "true";
+            verifier = code_data[0].owner;
+            type = "alumni";
+          } else {
+            const verifiedData = await verifiedSchema.find({
+              email: body.email,
+            });
+            try {
+              if (verifiedData[0].email == body.email) {
+                verified = "true";
+                type = "alumni";
+              } else {
+                verified = "false";
+                type = "alumni";
+              }
+            } catch {
+              verified = "false";
+              type = "alumni";
+            }
+          }
         } else {
           const verifiedData = await verifiedSchema.find({ email: body.email });
           try {
@@ -69,6 +93,7 @@ router.post("/", async (req, res) => {
           type: type,
           secret: secret,
           sessions: [],
+          verifier: verifier,
         });
         if (verified == "true") {
           let registeredUserData = await registerations.find({

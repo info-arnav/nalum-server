@@ -41,6 +41,7 @@ const getRecruitedRostRetaData = require("./routes/get-recruited-post-meta-data"
 const getRecruitedsStatus = require("./routes/get-recruiteds-status");
 const messages = require("./routes/messages");
 const findInvitedPeople = require("./routes/find-invited-people");
+const getRefferal = require("./routes/get-refferal");
 
 require("dotenv").config();
 
@@ -50,21 +51,21 @@ app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.raw({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use(cookieParser());
-app.use(
-  cors({
-    origin: "https://nsut.alumninet.in",
-  })
-);
-app.use((req, res, next) => {
-  const requestIP = req.ip;
-  const allowedIP = "::1";
+// app.use(
+//   cors({
+//     origin: "https://nsut.alumninet.in",
+//   })
+// );
+// app.use((req, res, next) => {
+//   const requestIP = req.ip;
+//   const allowedIP = "::1";
 
-  if (requestIP === allowedIP) {
-    next();
-  } else {
-    res.status(403).send({ error: true, message: "Forbidden - Access Denied" });
-  }
-});
+//   if (requestIP === allowedIP) {
+//     next();
+//   } else {
+//     res.status(403).send({ error: true, message: "Forbidden - Access Denied" });
+//   }
+// });
 
 MONGODB_URL = process.env.MONGODB_URI;
 
@@ -91,6 +92,7 @@ app.use("/get-doc", getDoc);
 app.use("/set-doc", setDoc);
 app.use("/find-people", findPeople);
 app.use("/send-invite", sendInvite);
+app.use("/get-refferal", getRefferal);
 app.use("/get-user-info", getUserInfo);
 app.use("/set-profile-picture", setProfilePicture);
 app.use("/update-profile", updateProfile);
