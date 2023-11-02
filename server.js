@@ -51,21 +51,21 @@ app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.raw({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use(cookieParser());
-// app.use(
-//   cors({
-//     origin: "https://nsut.alumninet.in",
-//   })
-// );
-// app.use((req, res, next) => {
-//   const requestIP = req.ip;
-//   const allowedIP = "::1";
+app.use(
+  cors({
+    origin: "https://nsut.alumninet.in",
+  })
+);
+app.use((req, res, next) => {
+  const requestIP = req.ip;
+  const allowedIP = "::1";
 
-//   if (requestIP === allowedIP) {
-//     next();
-//   } else {
-//     res.status(403).send({ error: true, message: "Forbidden - Access Denied" });
-//   }
-// });
+  if (requestIP === allowedIP) {
+    next();
+  } else {
+    res.status(403).send({ error: true, message: "Forbidden - Access Denied" });
+  }
+});
 
 MONGODB_URL = process.env.MONGODB_URI;
 
