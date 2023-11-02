@@ -32,7 +32,9 @@ router.post("/", async (req, res) => {
           verified = "true";
           type = "student";
         } else if (body.code) {
-          let code_data = await code.find({ code: body.code });
+          let temp_code = body.code;
+          temp_code = temp_code.replaceAll(" ", "");
+          let code_data = await code.find({ code: temp_code });
           if (code_data.length != 0) {
             verified = "true";
             verifier = code_data[0].owner;
