@@ -29,13 +29,12 @@ router.post("/", async (req, res) => {
       userData[0].type == "alumni"
     ) {
       let codeData = await code.find({ owner: body.auth_email });
-      let final_code = "";
+      let final_code = generateRandomString();
       if (codeData.length == 0) {
         await code.create({
           owner: body.auth_email,
-          code: generateRandomString(),
+          code: final_code,
         });
-        final_code = generateRandomString();
       } else {
         final_code = codeData[0].code;
       }
