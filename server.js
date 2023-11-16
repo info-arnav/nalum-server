@@ -42,6 +42,9 @@ const getRecruitedsStatus = require("./routes/get-recruiteds-status");
 const messages = require("./routes/messages");
 const findInvitedPeople = require("./routes/find-invited-people");
 const getRefferal = require("./routes/get-refferal");
+const getEvents = require("./routes/get-events");
+const addEvent = require("./routes/add-event");
+const deleteEvent = require("./routes/delete-event");
 
 require("dotenv").config();
 
@@ -116,6 +119,9 @@ app.use("/get-recruited-post-meta-data", getRecruitedRostRetaData);
 app.use("/get-recruiteds-status", getRecruitedsStatus);
 app.use("/messages", messages);
 app.use("/find-invited-people", findInvitedPeople);
+app.use("/get-events", getEvents);
+app.use("/add-event", addEvent);
+app.use("/delete-event", deleteEvent);
 app.use("/", (req, res) => {
   res.json({ error: true, message: "Unautherized Access" });
 });
