@@ -90,6 +90,7 @@ router.post("/", async (req, res) => {
           department: body.department,
           batch: body.batch,
           work_status: body.work_status,
+          name: body.name,
           roll: body.roll,
           verified: verified,
           type: type,
