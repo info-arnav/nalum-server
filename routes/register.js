@@ -106,6 +106,7 @@ router.post("/", async (req, res) => {
             {
               type: type,
               email: body.email,
+              name: body.name,
               objectID: registeredUserData[0]._id,
               image: `${process.env.LINK}api/image/${registeredUserData[0]._id}`,
             },

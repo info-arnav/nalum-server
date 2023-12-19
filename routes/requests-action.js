@@ -41,6 +41,7 @@ router.post("/", async (req, res) => {
           objectID: newUserData[0]._id,
           image: `${process.env.LINK}api/image/${newUserData[0]._id}`,
           batch: newUserData[0].batch,
+          name: newUserData[0].name,
         })
         .then(async () => {
           await transporter
