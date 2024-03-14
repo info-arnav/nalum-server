@@ -45,6 +45,7 @@ const getRefferal = require("./routes/get-refferal");
 const getEvents = require("./routes/get-events");
 const addEvent = require("./routes/add-event");
 const deleteEvent = require("./routes/delete-event");
+const sendMail = require("./routes/send-mail");
 
 require("dotenv").config();
 
@@ -122,6 +123,7 @@ app.use("/find-invited-people", findInvitedPeople);
 app.use("/get-events", getEvents);
 app.use("/add-event", addEvent);
 app.use("/delete-event", deleteEvent);
+app.use("/send-mail", sendMail);
 app.use("/", (req, res) => {
   res.json({ error: true, message: "Unautherized Access" });
 });
