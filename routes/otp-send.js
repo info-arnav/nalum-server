@@ -46,7 +46,6 @@ router.post("/", async (req, res) => {
           `,
         })
         .then(async (e) => {
-          console.log(e);
           let otpData = await otp.find({ email: body.email });
           if (otpData.length == 0) {
             otp.create({ email: body.email, otp: OTP });
