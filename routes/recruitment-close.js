@@ -29,7 +29,7 @@ router.post("/", async (req, res) => {
     });
     await recruitments.findOneAndDelete({ _id: body.id });
     let transporter = nodemailer.createTransport({
-      host: "smtp.rediffmailpro.com",
+      host: "smtpout.secureserver.net",
       port: 465,
       secure: true,
       auth: {

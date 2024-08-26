@@ -36,7 +36,7 @@ router.post("/", async (req, res) => {
     ];
     if (numbers.includes(applicants)) {
       let transporter = nodemailer.createTransport({
-        host: "smtp.rediffmailpro.com",
+        host: "smtpout.secureserver.net",
         port: 465,
         secure: true,
         auth: {

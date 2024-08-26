@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.post("/", async (req, res) => {
   let transporter = nodemailer.createTransport({
-    host: "smtp.rediffmailpro.com",
+    host: "smtpout.secureserver.net",
     port: 465,
     secure: true,
     auth: {

@@ -10,7 +10,7 @@ router.post("/", async (req, res) => {
   const users = await registerations.find({ email: body.email });
   if (users.length != 0) {
     let transporter = nodemailer.createTransport({
-      host: "smtp.rediffmailpro.com",
+      host: "smtpout.secureserver.net",
       port: 465,
       secure: true,
       auth: {
