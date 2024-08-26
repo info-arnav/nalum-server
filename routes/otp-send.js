@@ -59,7 +59,8 @@ router.post("/", async (req, res) => {
             });
           }
         });
-    } catch {
+    } catch (e) {
+      console.log(e);
       res.json({ error: true, message: "Some Error Occured" });
     }
   } else {
