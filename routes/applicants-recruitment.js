@@ -36,9 +36,12 @@ router.post("/", async (req, res) => {
     ];
     if (numbers.includes(applicants)) {
       let transporter = nodemailer.createTransport({
-        host: "smtpout.secureserver.net",
-        port: 465,
-        secure: true,
+        host: "smtp.office365.com",
+        secure: false,
+        port: 587,
+        tls: {
+          ciphers: "SSLv3",
+        },
         auth: {
           user: "admin@alumninet.in",
           pass: process.env.MAIL_PASSWORD,
